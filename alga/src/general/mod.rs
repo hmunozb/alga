@@ -156,7 +156,7 @@
 //! }
 //! ~~~
 
-pub use self::identity::{Id, Identity};
+pub use self::identity::{Id, Identity, DynamicIdentity};
 pub use self::operator::{
     Additive, ClosedAdd, ClosedDiv, ClosedMul, ClosedNeg, ClosedSub, Multiplicative, Operator,
     TwoSidedInverse,
