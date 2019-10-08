@@ -1,9 +1,18 @@
 use approx::RelativeEq;
 
-use crate::general::{Operator, AbstractSemigroup, AbstractMonoid, AbstractLoop, AbstractGroup, Module, RingCommutative, AbstractRing, AbstractRingCommutative, AbstractGroupAbelian, AbstractModule};
+use crate::general::{Operator, AbstractSemigroup, AbstractMonoid, AbstractLoop, AbstractQuasigroup,
+                     AbstractGroup, Module, RingCommutative, AbstractRing, AbstractRingCommutative,
+                     AbstractGroupAbelian, AbstractModule};
 use crate::general::identity::DynamicIdentity;
 use crate::general::{Additive, Multiplicative};
 use crate::general::ClosedMul;
+
+///Dynamic Loop
+pub trait DynamicLoop<O: Operator>: AbstractQuasigroup<O> + DynamicIdentity<O> {
+
+}
+
+impl<O: Operator, T: AbstractLoop<O>> DynamicLoop<O> for T{}
 
 /// A Dynamic Monoid assigns an identity to each element such that a * e = e * a = a
 pub trait DynamicMonoid<O: Operator>: AbstractSemigroup<O> + DynamicIdentity<O> {
@@ -36,7 +45,7 @@ impl<O: Operator, T: AbstractMonoid<O>> DynamicMonoid<O> for T{
 
 
 /// A dynamic group is a loop and a dynamic monoid
-pub trait DynamicGroup<O: Operator>: AbstractLoop<O> + DynamicMonoid<O> { }
+pub trait DynamicGroup<O: Operator>: DynamicLoop<O> + DynamicMonoid<O> { }
 
 impl<O: Operator, T: AbstractGroup<O>> DynamicGroup<O> for T {
 
