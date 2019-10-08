@@ -97,7 +97,7 @@ pub trait DynamicAbstractModule<
 >: DynamicGroupAbelian<OpGroup>
 {
     /// The underlying scalar field.
-    type AbstractRing: DynamicRingCommutative<OpAdd, OpMul>;
+    type AbstractRing: AbstractRingCommutative<OpAdd, OpMul>;
 
     /// Multiplies an element of the ring with an element of the module.
     fn multiply_by(&self, r: Self::AbstractRing) -> Self;
@@ -121,7 +121,7 @@ DynamicAbstractModule<AbstractRing = <Self as DynamicModule>::Ring>
 + ClosedMul<<Self as DynamicModule>::Ring>
 {
     /// The underlying scalar field.
-    type Ring: DynamicRingCommutative;
+    type Ring: AbstractRingCommutative;
 }
 
 impl<T: Module> DynamicModule for T {
