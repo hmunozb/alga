@@ -32,6 +32,30 @@ pub trait Identity<O: Operator> {
     }
 }
 
+/// A type that can instantiate an identity element to each instance of the type
+pub trait DynamicIdentity<O: Operator>: Sized {
+    ///The identity element for the instance
+    fn identity(&self) -> Self;
+
+    ///Instantiate an identity off another Self type
+    fn identity_like(other: &Self) -> Self{ other.identity() }
+
+    /// Specific identity for the instance
+    #[inline]
+    fn id(&self, _: O) -> Self
+        where
+            Self: Sized,
+    {
+        Self::identity(self)
+    }
+}
+
+impl<O: Operator, T: Identity<O>> DynamicIdentity<O> for T{
+    fn identity(&self) -> Self{
+        <Self as Identity<O>>::identity()
+    }
+}
+
 impl_ident!(Additive; 0; u8, u16, u32, u64, usize, i8, i16, i32, i64, isize);
 impl_ident!(Additive; 0.; f32, f64);
 #[cfg(feature = "decimal")]
