@@ -179,6 +179,8 @@ pub use self::specialized::{
 };
 pub use self::two_operators::{AbstractField, AbstractRing, AbstractRingCommutative};
 
+pub use self::dynamic::*;
+
 #[macro_use]
 mod one_operator;
 mod complex;
@@ -190,6 +192,7 @@ mod real;
 mod specialized;
 mod subset;
 mod two_operators;
+mod dynamic;
 #[doc(hidden)]
 pub mod wrapper;
 
