@@ -1,11 +1,11 @@
 use approx::RelativeEq;
 
-use crate::general::{Operator, AbstractSemigroup, AbstractMonoid, AbstractLoop, AbstractQuasigroup,
-                     AbstractGroup, Module, RingCommutative, AbstractRing, AbstractRingCommutative,
-                     AbstractGroupAbelian, AbstractModule};
-use crate::general::identity::DynamicIdentity;
+use crate::general::{AbstractGroup, AbstractGroupAbelian, AbstractLoop, AbstractModule,
+                     AbstractMonoid, AbstractQuasigroup, AbstractRing, AbstractRingCommutative,
+                     AbstractSemigroup, Module, Operator,  RingCommutative};
 use crate::general::{Additive, Multiplicative};
 use crate::general::ClosedMul;
+use crate::general::identity::DynamicIdentity;
 
 ///Dynamic Loop
 pub trait DynamicLoop<O: Operator>: AbstractQuasigroup<O> + DynamicIdentity<O> {
@@ -121,7 +121,7 @@ DynamicAbstractModule<AbstractRing = <Self as DynamicModule>::Ring>
 + ClosedMul<<Self as DynamicModule>::Ring>
 {
     /// The underlying scalar field.
-    type Ring: AbstractRingCommutative;
+    type Ring: RingCommutative;
 }
 
 impl<T: Module> DynamicModule for T {
